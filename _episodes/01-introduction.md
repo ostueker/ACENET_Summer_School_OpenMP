@@ -12,4 +12,38 @@ keypoints:
 - "Programs are limited to a single physical machine"
 ---
 
-Parallel programs come in two broad flavors: shared-memory and message-passing. In this workshop, we will be looking at shared-memory programming, with a focus on OpenMP programming. But, what is shared-memory programming? In any parallel program, the general idea is to have multiple threads of execution so that you can break up your problem and have each thread handle one part. These multiple threads need to be able to communicate with each other as your program runs. In a shared-memory program, this communication happens through the use of global variables stored in the global memory of the local machine. This means that communication between the various threads is extremely fast, as it happens at the speed of RAM access. The major downfall is that your program will be limited to a single physical machine.
+Parallel programs come in two broad flavors: shared-memory and message-passing. In this workshop, we will be looking at shared-memory programming, with a focus on OpenMP programming. But, what is shared-memory programming? In any parallel program, the general idea is to have multiple threads of execution so that you can break up your problem and have each thread handle one part. These multiple threads need to be able to communicate with each other as your program runs. In a shared-memory program, this communication happens through the use of global variables stored in the global memory of the local machine. This means that communication between the various threads is extremely fast, as it happens at the speed of RAM access. The major downfall is that your program will be limited to a single physical machine, since all threads need to be able to see the same RAM.
+
+OpenMP is one way of writing shared-memory parallel programs. OpenMP is actually a specification, which needs to be implemented by interested groups. The core idea is that this functionality is provided by extensions to a C/C++ or FORTRAN compiler, as opposed to an external library that gets linked into your program. This means that you need use a compiler that supports OpenMP. Unfortunately, there have been several versions of the OpenMP specification, and several sections of it are optional, so it is up to the programmer to investiate the compiler they want to use and see if it supports the parts of OpenMP that they wish to use. Luckily, the vast majority of OpenMP behaves the way you expect it to with most modern compilers. When possible, we will try and highlight any odd behaviors.
+
+Since OpenMP is meant to be used with either C/C++ or FORTRAN, you will need to know how to work with at least one of these languages. This workshop will use C as the language for the examples. As a reminder, a simple hello world program in C would look like the following.
+
+~~~
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char **argv) {
+   printf("Hello World\n");
+}
+~~~
+{: .source}
+
+In order to compile this code, you would need to use the following command:
+
+~~~
+gcc -o hello_world hello_world.c
+~~~
+{: .bash}
+
+># GCC on ACENET
+>
+> In order to use GCC on the ACENET clusters, you need to be sure your environment is correctly set up. You can do this with the following module commands.
+>
+> ~~~
+> module purge
+> 
+> module load gcc
+> ~~~
+> {: .bash}
+{: callout}
+
