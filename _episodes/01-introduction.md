@@ -35,6 +35,18 @@ gcc -o hello_world hello_world.c
 ~~~
 {: .bash}
 
+This gives you an executable file that will print out the text "Hello World". You can do this with the command:
+
+~~~
+./hello_world
+~~~
+{: .bash}
+
+~~~
+Hello World
+~~~
+{: .output}
+
 ># GCC on ACENET
 >
 > In order to use GCC on the ACENET clusters, you need to be sure your environment is correctly set up. You can do this with the following module commands.
