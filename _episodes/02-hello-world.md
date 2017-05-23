@@ -87,9 +87,7 @@ export OMP_NUM_THREADS=3
 ~~~
 {: .bash}
 
-~~~
-Try running the hello world program with a number of different threads? Can you use more threads than the cores on the machine?
-~~~
+> Try running the hello world program with a number of different threads? Can you use more threads than the cores on the machine?
 {: .challenge}
 
 > ## OpenMP with Grid Engine
@@ -122,9 +120,7 @@ int main(int argc, char **argv) {
 
 Here, you will get each thread tagging their output with their unique ID, a number between 0 and NUM_THREADS-1.
 
-~~~
-What order do the threads write out their messages in?
-~~~
+> What order do the threads write out their messages in?
 {: .challenge}
 
 You should see something interesting here.
