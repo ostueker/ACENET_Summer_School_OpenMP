@@ -17,6 +17,15 @@ keypoints:
 - "If the compiler doesn't recognize OpenMP pragmas, it will compile a single-threaded program"
 ---
 
+> ## GCC on ACENET
+> To use GCC on the ACENET clusters, you need to load the appropriate module.
+> ~~~
+> module purge
+> module load gcc
+> ~~~
+> {: .bash}
+{: .callout}
+
 As with every programming course, we will start off by looking at a hello world program. The classic form for the C programming language is the following.
 
 ~~~
@@ -69,14 +78,6 @@ gcc -fopenmp -o hello_world hello_world.c
 ~~~
 {: .source}
 
-> ## GCC on ACENET
-> To use GCC on the ACENET clusters, you need to load the appropriate module.
-> ~~~
-> module purge
-> module load gcc
-> ~~~
-> {: .bash}
-{: .callout}
 
 When you run this program, you should see the output "Hello World" multiple times. But how many? By default, OpenMP will look at the machine that it is running on and see how many computer cores there are. It will then launch a thread for each core. You can control the number of threads, however, with environment variables. If you wanted to only have 3 threads used, you could do the following:
 
@@ -119,7 +120,11 @@ int main(int argc, char **argv) {
 ~~~
 {: .source}
 
+Here, you will get each thread tagging their output with their unique ID, a number between 0 and NUM_THREADS-1.
+
 ~~~
 What order do the threads write out their messages in?
 ~~~
 {: .challenge}
+
+You should see something interesting here.
