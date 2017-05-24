@@ -41,6 +41,7 @@ int main(int argc, char **argv) {
 
 We added some calls to 'clock_gettime()' from the 'time.h' header file to get the start and end times of the heavy work being done by the for loop. In this case, we get a count of how many seconds and how many nanoseconds elapsed, given in two parts of the time structure. We did some math to get the elapsed time in milliseconds.
 
+> ## Time and Size
 > What happens to the run time of your program through multiple runs?
 > What happens if you change the size and recompile and rerun?
 {: .challenge}
@@ -73,11 +74,13 @@ int main(int argc, char **argv) {
 ~~~
 {: .source}
 
+> ## Compiling with GCC
 > Don't forget to add the option '-fopenmp' to your GCC compiler command.
 {: .callout}
 
 Here, we added a line to include the header file 'omp.h' and a line to include the 'parallel for' pragma.
 
+> ## Using more threads
 > What happens to the runtime when you change the number of threads to be used?
 {: .challenge}
 
@@ -111,6 +114,7 @@ int main(int argc, char **argv) {
 ~~~
 {: .source}
 
+> ## Time/threads?
 > What happens to the run time as you change the number of threads available?
 {: .challenge}
 
@@ -145,6 +149,7 @@ int main(int argc, char **argv) {
 
 Here we added a call to 'omp_set_num_threads()' in order to explicitly set the number of threads requested to 10.
 
+> ## Compiler gotchas
 > This call is one of the optional ones. You particular compiler/version may or may not support it.
 > If it doesn't support the call, it will simply fail silently, allowing your program to finish.
 {: .callout}
