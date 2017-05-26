@@ -6,10 +6,8 @@ questions:
 - "How can we calculate integrals?"
 objectives:
 - "Learn about critical sections"
-- "Drop out of a parallel section"
 keypoints:
 - "Need to control access to global variables"
-- "Sometimes need to have work done by only one thread"
 ---
 
 In this section, we will use the problem of numeric integration, i.e. calculating areas under curves, to look at how to control access to global variables. As our example, let's say we wanted to integrate the sine function from 0 to Pi. This is the same as the area under the first half of a sine curve. The single-threaded version is below.
@@ -64,13 +62,16 @@ You can get better or worse accuracy based on step size. We still want to see wh
 > > #include <stdio.h>
 > > #include <stdlib.h>
 > > #include <math.h>
-> > 
+> > #include <omp.h>
+> >
 > > int main(int argc, char **argv) {
 > >    int steps = 1000;
 > >    float delta = M_PI/steps;
 > >    float total = 0.0;
 > >    int i;
+> >    #pragma omp parallel for
 > >    for (i=0; i<steps; i++) {
+> >       #pragma omp critical
 > >       total = total + sin(delta*i) * delta;
 > >    }
 > >    printf("The integral of sine from 0 to Pi is %f\n", total);
@@ -79,3 +80,9 @@ You can get better or worse accuracy based on step size. We still want to see wh
 > > {: .source}
 > {: .solution}
 {: .challenge}
+
+This challenge highlights a problem called a race condition. Since we are updating a global variable, there is a race between the various threads as to who can read and then write the value of 'total'. Multiple threads could read the current value, before a working thread can write their addition. So these reading threads essentially miss out on some additions to the total. This is handled by adding a critical section. A critical section only allows one thread at a time to run some code block.
+
+> ## Code blocks
+> Just a note that code blocks in C are either a single line, or a series of lines wrapped by curly brackets.
+{: .callout}
