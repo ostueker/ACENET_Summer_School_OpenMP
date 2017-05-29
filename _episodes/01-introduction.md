@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 teaching: 15
-exercises: 0
+exercises: 10
 questions:
 - "What is shared-memory programming?"
 - "What is OpenMP?"

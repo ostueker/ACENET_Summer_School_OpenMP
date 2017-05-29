@@ -64,3 +64,30 @@ There are times when you may need to drop out of a parallel section in order to 
 > {: .solution}
 {: .challenge}
 
+## Searching
+
+Let's say that we need to search through an array to find the largest value. How could we do this type of search in parallel? Let's begin with the serial version.
+
+~~~
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char **argv) {
+   int size = 10000;
+   float rand_nums[size];
+   int i;
+   float curr_max;
+   for (i=0; i<size; i++) {
+      rand_nums[i] = rand();
+   }
+   curr_max = 0.0;
+   for (i=0; i<size; i++) {
+      if (curr_size < rand_nums[i]) {
+         curr_size = rand_nums[i];
+      }
+   }
+   printf("Max value is %f\n", curr_max);
+}
+~~~
+{: .source}
+

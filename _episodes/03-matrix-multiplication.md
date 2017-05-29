@@ -134,52 +134,53 @@ int main(int argc, char **argv) {
 {: .source}
 
 > ## Does OpenMP handle multiple nested loops correctly?
+> > ## Solution
+> > All of the threads within an OpenMP program actually exist within a single process. This means that every thread can see and access all of memory for the process. In the above case, this means that multiple threads are all accessing the global variable j at the same time. OpenMP includes a method to manage this correctly with the addition of a keyword, private.
+> > 
+> > ~~~
+> > #include <stdio.h>
+> > #include <stdlib.h>
+> > #include <time.h>
+> > #include <omp.h>
+> > 
+> > int main(int argc, char **argv) {
+> >    struct timespec ts_start, ts_end;
+> >    int size = 1000;
+> >    int multiplier = 2;
+> >    int a[size][size];
+> >    # Set the matrix values to 1
+> >    for (i=0; i<size; i++) {
+> >       for (j=0; j<size; j++) {
+> >          s[i][j] = 1;
+> >       }
+> >    }
+> >    int c[size];
+> >    # Initialize to 0
+> >    for (i=0; i<size; i++) {
+> >       c[i] = 0;
+> >    }
+> >    int i,j, total;
+> >    float time_total;
+> >    clock_gettime(CLOCK_MONOTONIC, &ts_start);
+> >    #pragma omp parallel for private(j)
+> >    for (i = 0; i<size; i++) {
+> >       for (j=0; j<size; j++) {
+> >          c[i] = c[i] + a[i,j];
+> >       }
+> >    }
+> >    for (i=0; i<size; i++) {
+> >       total = total + c[i];
+> >    }
+> >    clock_gettime(CLOCK_MONOTONIC, &ts_end);
+> >    time_total = (ts_end.tv_sec - ts_start.tv_sec)*1000000000 + (ts_end.tv_nsec - ts_start.tv_nsec);
+> >    printf("Total is %d, time is %f ms\n", total, time_total/1000000);
+> > }
+> > ~~~
+> > {: .source}
+> > 
+> > This makes sure that every thread has their own private copy of j to be used for the inner for loop.
+> {: .solution}
 {: .challenge}
-
-All of the threads within an OpenMP program actually exist within a single process. This means that every thread can see and access all of memory for the process. In the above case, this means that multiple threads are all accessing the global variable j at the same time. OpenMP includes a method to manage this correctly with the addition of a keyword, private.
-
-~~~
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <omp.h>
-
-int main(int argc, char **argv) {
-   struct timespec ts_start, ts_end;
-   int size = 1000;
-   int multiplier = 2;
-   int a[size][size];
-   # Set the matrix values to 1
-   for (i=0; i<size; i++) {
-      for (j=0; j<size; j++) {
-         s[i][j] = 1;
-      }
-   }
-   int c[size];
-   # Initialize to 0
-   for (i=0; i<size; i++) {
-      c[i] = 0;
-   }
-   int i,j, total;
-   float time_total;
-   clock_gettime(CLOCK_MONOTONIC, &ts_start);
-   #pragma omp parallel for private(j)
-   for (i = 0; i<size; i++) {
-      for (j=0; j<size; j++) {
-         c[i] = c[i] + a[i,j];
-      }
-   }
-   for (i=0; i<size; i++) {
-      total = total + c[i];
-   }
-   clock_gettime(CLOCK_MONOTONIC, &ts_end);
-   time_total = (ts_end.tv_sec - ts_start.tv_sec)*1000000000 + (ts_end.tv_nsec - ts_start.tv_nsec);
-   printf("Total is %d, time is %f ms\n", total, time_total/1000000);
-}
-~~~
-{: .source}
-
-This makes sure that every thread has their own private copy of j to be used for the inner for loop.
 
 > ## Time/threads?
 > What happens to the run time as you change the number of threads available?
