@@ -120,3 +120,5 @@ The first stab would be to make the for loop a parallel for loop. You would want
 > {: .source}
 {: .solution}
 
+The other reduction operators that you can use are: +, *, -, &, |, ^, &&, ||, max, min.
+
