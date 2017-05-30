@@ -91,3 +91,32 @@ int main(int argc, char **argv) {
 ~~~
 {: .source}
 
+The first stab would be to make the for loop a parallel for loop. You would want to make sure that each thread had a private copy of the 'curr_size' variable, since it will be written to. But, how do you find out which thread has the largest value?
+
+> ## Reduction Operators
+> OpenMP has the ability to use reduction operators to collect data from threads and summarize them somehow.
+> ~~~
+> #include <stdio.h>
+> #include <stdlib.h>
+>
+> int main(int argc, char **argv) {
+>    int size = 10000;
+>    float rand_nums[size];
+>    int i;
+>    float curr_max;
+>    for (i=0; i<size; i++) {
+>       rand_nums[i] = rand();
+>    }
+>    curr_max = 0.0;
+>    #pragma omp parallel for reduction(max:curr_size)
+>    for (i=0; i<size; i++) {
+>       if (curr_size < rand_nums[i]) {
+>          curr_size = rand_nums[i];
+>       }
+>    }
+>    printf("Max value is %f\n", curr_max);
+> }
+> ~~~
+> {: .source}
+{: .solution}
+
