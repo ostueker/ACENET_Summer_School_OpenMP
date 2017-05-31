@@ -88,6 +88,8 @@ Here, we added a line to include the header file 'omp.h' and a line to include t
 > What happens to the runtime when you change the number of threads to be used?
 {: .challenge}
 
+In this case, the number of iterations around the for loop gets divided across the number of threads available. In order to do this, however, OpenMP needs to know how many iterations there are in the for loop. It also can't change part way through the loops. How can this happen? You can't change the value of 'size' within one of the iterations. You also can't use a call to 'break()' or 'exit()' within the for loop, either. These functions pop you out of the for loop before it is done.
+
 ## Summing the values in a matrix
 
 Moving up to a 2D matrix adds a new layer of looping. The basic code looks like the following.
@@ -181,6 +183,8 @@ int main(int argc, char **argv) {
 > > This makes sure that every thread has their own private copy of j to be used for the inner for loop.
 > {: .solution}
 {: .challenge}
+
+This leads to a very important idea, the concept of reentrant functions. You need to be aware when writing multi-threaded programs whether functions you are using are reentrant or not. A classic example where this happens is when generating random numbers. These functions maintain state between calls to them. If they aren't written to be reentrant, then that internal state can get mixed up by multiple threads calling them at the same time.
 
 > ## Time/threads?
 > What happens to the run time as you change the number of threads available?

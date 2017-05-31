@@ -17,46 +17,23 @@ keypoints:
 - "If the compiler doesn't recognize OpenMP pragmas, it will compile a single-threaded program"
 ---
 
-> ## GCC on ACENET
-> To use GCC on the ACENET clusters, you need to load the appropriate module.
-> ~~~
-> module purge
-> module load gcc
-> ~~~
-> {: .bash}
-{: .callout}
+Since OpenMP is an extension to the compiler, you need to be able to tell the compiler when and where to add the code necessary to create and use threads for the parallel sections. This is handled through special statements called pragmas. Pragmas look like comments to a compiler that doesn't understand OpenMP. The basic form looks like the following:
 
-As with every programming course, we will start off by looking at a hello world program. The classic form for the C programming language is the following.
-
+C/C++
 ~~~
-#include <stdio.h>
-#include <stdlib.h>
-
-int main(int argc, char **argv) {
-   printf("Hello World\n");
-}
+#pragma omp ...
 ~~~
 {: .source}
 
-To compile this program, you would use the following command.
+FORTRAN
+~~~
+!OMP ...
+~~~
+{: .source}
 
-~~~
-gcc -o hello_world hello_world.c
-~~~
-{: .bash}
+## Hello World
 
-When running it, you should get the following results.
-
-~~~
-./hello_world
-~~~
-{: .bash}
-~~~
-Hello World
-~~~
-{: .output}
-
-How do we add in parallelism to this basic program? The very first pragma that we will look at is the parallel pragma.
+How do we add in parallelism to the basic hello world program? The very first pragma that we will look at is the parallel pragma.
 
 ~~~
 #include <stdio.h>
@@ -77,7 +54,6 @@ To compile it, you'll need to add an extra flag to tell the compiler to treat th
 gcc -fopenmp -o hello_world hello_world.c
 ~~~
 {: .source}
-
 
 When you run this program, you should see the output "Hello World" multiple times. But how many? By default, OpenMP will look at the machine that it is running on and see how many computer cores there are. It will then launch a thread for each core. You can control the number of threads, however, with environment variables. If you wanted to only have 3 threads used, you could do the following:
 
