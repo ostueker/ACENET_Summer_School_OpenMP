@@ -119,5 +119,5 @@ You should see something interesting here.
 > >    printf("Hello World from thread %d\n", id);
 > >    }
 > > }
-> >
+> {: .solution}
 {: .challenge}
