@@ -3,21 +3,17 @@ title: "Hello World"
 teaching: 20
 exercises: 20
 questions:
-- "How do you add OpenMP pragmas?"
-- "What pragmas are available?"
-- "How do you compile OpenMP programs?"
-- "How do you affect the running of OpenMP programs?"
+- "How do you compile and run an OpenMP program?"
+- "What are OpenMP pragmas?"
 objectives:
 - "Learning about pragmas"
-- "Adding pragmas to your program"
-- "Compiling an OpenMP program"
-- "Running an OpenMP program"
+- "Compiling and running an OpenMP program"
 keypoints:
-- "Pragmas look like comments"
+- "Pragmas are directives to the compiler to parallelize something"
 - "If the compiler doesn't recognize OpenMP pragmas, it will compile a single-threaded program"
 ---
 
-Since OpenMP is an extension to the compiler, you need to be able to tell the compiler when and where to add the code necessary to create and use threads for the parallel sections. This is handled through special statements called pragmas. Pragmas look like comments to a compiler that doesn't understand OpenMP. The basic form looks like the following:
+Since OpenMP is an extension to the compiler, you need to be able to tell the compiler when and where to add the code necessary to create and use threads for the parallel sections. This is handled through special statements called pragmas. To a compiler that doesn't understand OpenMP, pragmas look like comments. The basic forms are:
 
 C/C++
 ~~~
@@ -51,7 +47,7 @@ int main(int argc, char **argv) {
 To compile it, you'll need to add an extra flag to tell the compiler to treat the source code as an OpenMP program.
 
 ~~~
-gcc -fopenmp -o hello_world hello_world.c
+gcc -fopenmp -o hello hello.c
 ~~~
 {: .source}
 
@@ -102,3 +98,26 @@ Here, you will get each thread tagging their output with their unique ID, a numb
 {: .challenge}
 
 You should see something interesting here.
+
+> ## Conditional compilation
+> Try compiling the code without the -fopenmp flag. What happens? Can you figure out how to fix it?
+>
+> Hint: The compiler defines a preprocessor variable \_OPENMP
+> > ## Solution
+> >
+> > #include <stdio.h>
+> > #include <stdlib.h>
+> > #include <omp.h>
+> > 
+> > int main(int argc, char **argv) {
+> >    int id = 0;
+> >    #pragma omp parallel
+> >    {
+> > #ifdef _OPENMP
+> >    id = omp_get_thread_num();
+> > #endif
+> >    printf("Hello World from thread %d\n", id);
+> >    }
+> > }
+> >
+{: .challenge}
