@@ -4,20 +4,17 @@ title: Setup
 permalink: /setup/
 ---
 
-While you can use any appropriately configured Linux system to follow along with this course, we will be assuming that you have an ACENET account. You can log into any of the available clusters, namely
+While you can use any appropriately configured Linux system to follow along with this course, we will be assuming that you have Compute Canada account. You can log into either of the general-purpose clusters, namely
 
-- fundy.ace-net.ca
-- mahone.ace-net.ca
-- glooscap.ace-net.ca
-- placentia.ace-net.ca
+- graham.computecanada.ca
+- cedar.computecanada.ca
 
-If you are running either Linux or Mac OSX, you can do this by opening a terminal window and logging in with 'ssh username@cluster.ace-net.ca'. If you are running Windows, then you will need to use either putty or Mobaxterm.
+If you are running either Linux or Mac OSX, you can do this by opening a terminal window and logging in with 'ssh username@cluster.computecanada.ca'. If you are running Windows, then you will need to use either putty or Mobaxterm.
 
-Once you are logged in, you should get an interactive session on a compute node with the command
+Once you are logged in, you can request an interactive session on a compute node with the command
 
 ~~~
-qrsh -cwd -pe openmp 4 -l h_rt=10:00:00 bash
+salloc --time=3:00:00 --cpus-per-task=4 
 ~~~
 {: .bash}
-
 
