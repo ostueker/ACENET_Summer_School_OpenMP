@@ -1,15 +1,15 @@
 ---
-title: "Matrix Multiplication"
+title: "Linear algebra"
 teaching: 20
 exercises: 20
 questions:
-- "How can you do matrix multiplication?"
+- "How can you parallelize vector and matrix operations?"
 objectives:
-- "Learn the parallel for pragma"
+- "Learn the PARALLEL FOR pragma"
 - "Use it to break work up across multiple threads"
-- "Using private variables"
+- "Use the PRIVATE clause"
 keypoints:
-- "The parallel for pragma automatically parallelizes code"
+- "The PARALLEL FOR pragma automatically parallelizes code"
 - "Need to be aware of global variables"
 ---
 
@@ -85,10 +85,13 @@ int main(int argc, char **argv) {
 Here, we added a line to include the header file 'omp.h' and a line to include the 'parallel for' pragma.
 
 > ## Using more threads
-> What happens to the runtime when you change the number of threads to be used?
+> How many threads did you use?
+> What happens to the runtime when you change the number of threads?
 {: .challenge}
 
-In this case, the number of iterations around the for loop gets divided across the number of threads available. In order to do this, however, OpenMP needs to know how many iterations there are in the for loop. It also can't change part way through the loops. How can this happen? You can't change the value of 'size' within one of the iterations. You also can't use a call to 'break()' or 'exit()' within the for loop, either. These functions pop you out of the for loop before it is done.
+In this case, the number of iterations around the for loop gets divided across the number of threads available. In order to do this, however, OpenMP needs to know how many iterations there are in the for loop. It also can't change part way through the loops. To ensure this, there are some rules: 
+* You must not change the value of 'size' within one of the iterations. 
+* You must not use a call to 'break()' or 'exit()' within the for loop, either. These functions pop you out of the for loop before it is done.
 
 ## Summing the values in a matrix
 
@@ -105,24 +108,25 @@ int main(int argc, char **argv) {
    int size = 1000;
    int multiplier = 2;
    int a[size][size];
-   # Set the matrix values to 1
+   int i, j;
+   // Set the matrix values to 1
    for (i=0; i<size; i++) {
       for (j=0; j<size; j++) {
-         s[i][j] = 1;
+         a[i][j] = 1;
       }
    }
    int c[size];
-   # Initialize to 0
+   // Zero the accumulator 
    for (i=0; i<size; i++) {
       c[i] = 0;
    }
-   int i,j, total;
+   int total = 0;
    float time_total;
    clock_gettime(CLOCK_MONOTONIC, &ts_start);
    #pragma omp parallel for
    for (i = 0; i<size; i++) {
       for (j=0; j<size; j++) {
-         c[i] = c[i] + a[i,j];
+         c[i] = c[i] + a[i][j];
       }
    }
    for (i=0; i<size; i++) {
@@ -135,9 +139,13 @@ int main(int argc, char **argv) {
 ~~~
 {: .source}
 
-> ## Does OpenMP handle multiple nested loops correctly?
+> ## Is the result correct?
+> What should be the result of this code? 
+> Is that what it does?  If not, what might be wrong?
+> Does it do the same for different values of OMP_NUM_THREADS?
+> 
 > > ## Solution
-> > All of the threads within an OpenMP program actually exist within a single process. This means that every thread can see and access all of memory for the process. In the above case, this means that multiple threads are all accessing the global variable j at the same time. OpenMP includes a method to manage this correctly with the addition of a keyword, private.
+> > Remember that OpenMP threads *share memory*. This means that every thread can see and access all of memory for the process. In the above case, multiple threads are all accessing the global variable `j` at the same time. OpenMP includes a method to manage this correctly with the addition of a keyword, `private()`.
 > > 
 > > ~~~
 > > #include <stdio.h>
@@ -150,24 +158,25 @@ int main(int argc, char **argv) {
 > >    int size = 1000;
 > >    int multiplier = 2;
 > >    int a[size][size];
-> >    # Set the matrix values to 1
+> >    int i, j;
+> >    // Set the matrix values to 1
 > >    for (i=0; i<size; i++) {
 > >       for (j=0; j<size; j++) {
-> >          s[i][j] = 1;
+> >          a[i][j] = 1;
 > >       }
 > >    }
 > >    int c[size];
-> >    # Initialize to 0
+> >    // Zero the accumulator
 > >    for (i=0; i<size; i++) {
 > >       c[i] = 0;
 > >    }
-> >    int i,j, total;
+> >    int total = 0;
 > >    float time_total;
 > >    clock_gettime(CLOCK_MONOTONIC, &ts_start);
 > >    #pragma omp parallel for private(j)
-> >    for (i = 0; i<size; i++) {
+> >    for (i=0; i<size; i++) {
 > >       for (j=0; j<size; j++) {
-> >          c[i] = c[i] + a[i,j];
+> >          c[i] = c[i] + a[i][j];
 > >       }
 > >    }
 > >    for (i=0; i<size; i++) {
@@ -180,11 +189,13 @@ int main(int argc, char **argv) {
 > > ~~~
 > > {: .source}
 > > 
-> > This makes sure that every thread has their own private copy of j to be used for the inner for loop.
+> > This makes sure that every thread has their own private copy of `j` to be used for the inner for loop.
 > {: .solution}
 {: .challenge}
 
-This leads to a very important idea, the concept of reentrant functions. You need to be aware when writing multi-threaded programs whether functions you are using are reentrant or not. A classic example where this happens is when generating random numbers. These functions maintain state between calls to them. If they aren't written to be reentrant, then that internal state can get mixed up by multiple threads calling them at the same time.
+## Re-entrant functions
+
+This leads to a very important idea, the concept of re-entrant functions. You need to be aware when writing multi-threaded programs whether functions you are using are reentrant or not. A classic example where this happens is when generating random numbers. These functions maintain state between calls to them. If they aren't written to be reentrant, then that internal state can get mixed up by multiple threads calling them at the same time.
 
 > ## Time/threads?
 > What happens to the run time as you change the number of threads available?
