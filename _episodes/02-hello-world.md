@@ -104,6 +104,7 @@ You should see something interesting here.
 >
 > Hint: The compiler defines a preprocessor variable \_OPENMP
 > > ## Solution
+> > ~~~
 > >
 > > #include <stdio.h>
 > > #include <stdlib.h>
@@ -119,5 +120,7 @@ You should see something interesting here.
 > >    printf("Hello World from thread %d\n", id);
 > >    }
 > > }
+> > ~~~
+> > {: .source}
 > {: .solution}
 {: .challenge}
