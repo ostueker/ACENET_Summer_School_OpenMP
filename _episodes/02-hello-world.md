@@ -95,8 +95,10 @@ How can you tell which thread is doing what? The OpenMP specification includes a
 int main(int argc, char **argv) {
    int id;
    #pragma omp parallel
+   {
    id = omp_get_thread_num();
    printf("Hello World from thread %d\n", id);
+   }
 }
 ~~~
 {: .source}
