@@ -60,19 +60,29 @@ export OMP_NUM_THREADS=3
 {: .bash}
 
 > ## Using multiple cores
-> Try running the hello world program with a number of different threads? Can you use more threads than the cores on the machine?
+> Try running the hello world program with different numbers of threads. Can you use more threads than the cores on the machine?
 {: .challenge}
 
-> ## OpenMP with Grid Engine
-> When you wish to submit an OpenMP job to Grid Engine, you can use the following boilerplate.
+> ## OpenMP with Slurm
+> When you wish to submit an OpenMP job to the job scheduler Slurm, you can use the following boilerplate.
 > ~~~
-> #$ -l h_rt=1:0:0
-> #$ -pe openmp 3
-> export OMP_NUM_THREADS=$NSLOTS
+> #SBATCH --account=acenet-wa
+> #SBATCH --reservation=acenet-wr_cpu
+> #SBATCH --time=0:15:0
+> #SBATCH --cpus-per-task=3
+> export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 > ./hello_world
 > ~~~
 > {: .bash}
+> 
+> You could also ask for an interactive session with multiple cores like so:
+> ~~~
+> salloc --account=acenet-wa --reservation=acenet-wr_cpu --cpus-per-task=4 --mem=12G --time=3:0:0
+> ~~~
+> {: bash}
 {: .callout}
+
+## Identifying threads
 
 How can you tell which thread is doing what? The OpenMP specification includes a number of functions that are made available through the included header file "omp.h". One of them is the function "omp_get_thread_num()", to get an ID of the thread running the code.
 
@@ -95,9 +105,8 @@ Here, you will get each thread tagging their output with their unique ID, a numb
 
 > ## Thread ordering
 > What order do the threads write out their messages in?
+> You should see something interesting here.
 {: .challenge}
-
-You should see something interesting here.
 
 > ## Conditional compilation
 > Try compiling the code without the -fopenmp flag. What happens? Can you figure out how to fix it?
