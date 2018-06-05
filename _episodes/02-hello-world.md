@@ -113,10 +113,12 @@ Here, you will get each thread tagging their output with their unique ID, a numb
 
 > ## Thread ordering
 > What order do the threads write out their messages in?
-> You should see something interesting here.
+> Try running the program a few times.
+> What's going on?
 {: .challenge}
 
 > ## Conditional compilation
+> We said earlier that you should be able to use the same code for both OpenMP and serial work.
 > Try compiling the code without the -fopenmp flag. What happens? Can you figure out how to fix it?
 >
 > Hint: The compiler defines a preprocessor variable \_OPENMP
