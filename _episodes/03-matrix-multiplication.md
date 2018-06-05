@@ -95,7 +95,8 @@ In this case, the number of iterations around the for loop gets divided across t
 
 ## Summing the values in a matrix
 
-Moving up to a 2D matrix adds a new layer of looping. The basic code looks like the following.
+Now let's try adding up the elements of a matrix.
+Moving up to two dimensions adds a new layer of looping. The basic code looks like the following.
 
 ~~~
 #include <stdio.h>
@@ -106,7 +107,6 @@ Moving up to a 2D matrix adds a new layer of looping. The basic code looks like 
 int main(int argc, char **argv) {
    struct timespec ts_start, ts_end;
    int size = 1000;
-   int multiplier = 2;
    int a[size][size];
    int i, j;
    // Set the matrix values to 1
@@ -145,7 +145,13 @@ int main(int argc, char **argv) {
 > Does it do the same for different values of OMP_NUM_THREADS?
 > 
 > > ## Solution
-> > Remember that OpenMP threads *share memory*. This means that every thread can see and access all of memory for the process. In the above case, multiple threads are all accessing the global variable `j` at the same time. OpenMP includes a method to manage this correctly with the addition of a keyword, `private()`.
+> > The elements all have value 1, and there are 1000*1000 of them, so the total should be 1,000,000. Why isn't it?
+> > 
+> > Remember that OpenMP threads *share memory*. This means that every thread
+> > can see and access all of memory for the process. In the above case, 
+> > multiple threads are all accessing the global variable `j` at the same time. 
+> >
+> > OpenMP includes a method to manage this correctly with the addition of a keyword, `private()`.
 > > 
 > > ~~~
 > > #include <stdio.h>
@@ -156,7 +162,6 @@ int main(int argc, char **argv) {
 > > int main(int argc, char **argv) {
 > >    struct timespec ts_start, ts_end;
 > >    int size = 1000;
-> >    int multiplier = 2;
 > >    int a[size][size];
 > >    int i, j;
 > >    // Set the matrix values to 1
