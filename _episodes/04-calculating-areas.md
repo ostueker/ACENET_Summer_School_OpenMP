@@ -83,6 +83,7 @@ You can get better or worse accuracy based on step size. We still want to see wh
 
 This challenge highlights a problem called a race condition. Since we are updating a global variable, there is a race between the various threads as to who can read and then write the value of 'total'. Multiple threads could read the current value, before a working thread can write their addition. So these reading threads essentially miss out on some additions to the total. This is handled by adding a critical section. A critical section only allows one thread at a time to run some code block.
 
-> ## Code blocks
-> Just a note that code blocks in C are either a single line, or a series of lines wrapped by curly brackets.
-{: .callout}
+The `critical` pragma is a very general construct that lets you ensure a code
+line is executed exclusively.  However, making a sum is a very common operation
+in computing, and OpenMP provides a specific mechanism to handle this: 
+*Reduction variables*. We'll look at those in the next section.

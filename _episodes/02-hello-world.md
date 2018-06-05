@@ -105,6 +105,12 @@ int main(int argc, char **argv) {
 
 Here, you will get each thread tagging their output with their unique ID, a number between 0 and NUM_THREADS-1.
 
+> ## Pragmas and code blocks
+> An OpenMP pragma applies to the following *code block* in C or C++.
+> Code blocks are either a single line, or a series of lines wrapped by curly brackets.
+> Because Fortran doesn't have an analogous construction, many OpenMP pragmas in Fortran are paired with an "end" pragma, such as `!$omp parallel end`.
+{: .callout}
+
 > ## Thread ordering
 > What order do the threads write out their messages in?
 > You should see something interesting here.

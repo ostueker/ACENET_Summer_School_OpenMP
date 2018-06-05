@@ -10,7 +10,12 @@ keypoints:
 - "OpenMP can manage general parallel tasks"
 ---
 
-The last technique we will look at is the task structure in OpenMP. In this case, you can use the task keyword within a parallel section to define sets of tasks that et queued up to run within the threads of the parallel section. They could run in any order. If you need to have results from the tasks before you can continue, you can use the taskwait keyword to tell OpenMP to pause your program until the tasks are done. This would look like the following:
+The last technique we will look at is the task structure in OpenMP. In this
+case, you can use the `task` keyword within a parallel section to define sets of
+tasks that get queued up to run within the threads of the parallel section. They
+could run in any order. If you need to have results from the tasks before you
+can continue, you can use the `taskwait` keyword to tell OpenMP to pause your
+program until the tasks are done. This would look like the following:
 
 ~~~
 #include <stdio.h>
@@ -45,8 +50,10 @@ int main(int argc, char **argv){
 
 In the main function, you need to start the parallel section so that all of the threads are launched. Since we only want the parent call to fib done once, we need to use the single keyword.
 
-> ## Task gotchas
-> There are a few gotchas to be aware of. While the intention is that tasks will run in parallel, there is nothing in the specification that guarantees his behavior. You may need to check how your particular environment works.
+> ## Task gotchas 
+> There are a few gotchas to be aware of. While the intention is that tasks
+> will run in parallel, there is nothing in the specification that guarantees
+> this behavior. You may need to check how your particular environment works.
 {: .callout}
 
 > ## Tasks?
