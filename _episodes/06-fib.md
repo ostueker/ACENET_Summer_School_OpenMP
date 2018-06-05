@@ -37,11 +37,14 @@ int fib(int n) {
 }
 
 int main(int argc, char **argv){
-   int result;
+   int n, result;
+   char *a = argv[1];
+   n = atoi(a);
+   
    #pragma omp parallel
    {
       #pragma omp single
-      result = fib(100);
+      result = fib(n);
    }
    printf("Result is %d\n", result);
 }
