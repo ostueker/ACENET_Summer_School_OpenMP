@@ -43,6 +43,10 @@ There are times when you may need to drop out of a parallel section in order to 
 
 > ## Which thread runs first?
 > How can you find out which thread gets to run first in a parallel section?
+> 
+> Hint: Try to find something appropriate here: 
+> <a href="https://www.openmp.org/wp-content/uploads/OpenMP-4.5-1115-CPP-web.pdf">Directives and Constructs for C/C++</a>.
+>
 > > ## Pragma omp single
 > > ~~~
 > > #include <stdio.h>
@@ -82,8 +86,8 @@ int main(int argc, char **argv) {
    }
    curr_max = 0.0;
    for (i=0; i<size; i++) {
-      if (curr_size < rand_nums[i]) {
-         curr_size = rand_nums[i];
+      if (curr_max < rand_nums[i]) {
+         curr_max = rand_nums[i];
       }
    }
    printf("Max value is %f\n", curr_max);
@@ -91,10 +95,24 @@ int main(int argc, char **argv) {
 ~~~
 {: .source}
 
-The first stab would be to make the for loop a parallel for loop. You would want to make sure that each thread had a private copy of the 'curr_size' variable, since it will be written to. But, how do you find out which thread has the largest value?
+The first stab would be to make the for loop a parallel for loop. You would
+want to make sure that each thread had a private copy of the 'curr_max'
+variable, since it will be written to. But, how do you find out which thread
+has the largest value?
+
 
 > ## Reduction Operators
-> OpenMP has the ability to use reduction operators to collect data from threads and summarize them somehow.
+> You could create an array of `curr_maxes`, but getting that to work right
+> would be messy--- How do you adapt to different NUM_THREADS?
+> 
+> The keys here are
+> 1) to recognize the analogy with the problem of `total` from the last episode, and
+> 2) to know about *reduction variables*.
+>
+> A reduction variable is used to accumulate some value over parallel threads,
+> like a sum, a global maximum, a global minimum, etc. 
+> The reduction operators that you can use are: +, *, -, &, |, ^, &&, ||, max, min.
+> 
 > ~~~
 > #include <stdio.h>
 > #include <stdlib.h>
@@ -108,10 +126,10 @@ The first stab would be to make the for loop a parallel for loop. You would want
 >       rand_nums[i] = rand();
 >    }
 >    curr_max = 0.0;
->    #pragma omp parallel for reduction(max:curr_size)
+>    #pragma omp parallel for reduction(max:curr_max)
 >    for (i=0; i<size; i++) {
->       if (curr_size < rand_nums[i]) {
->          curr_size = rand_nums[i];
+>       if (curr_max < rand_nums[i]) {
+>          curr_max = rand_nums[i];
 >       }
 >    }
 >    printf("Max value is %f\n", curr_max);
@@ -119,6 +137,4 @@ The first stab would be to make the for loop a parallel for loop. You would want
 > ~~~
 > {: .source}
 {: .solution}
-
-The other reduction operators that you can use are: +, *, -, &, |, ^, &&, ||, max, min.
 
