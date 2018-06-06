@@ -1,7 +1,7 @@
 ---
 title: "Linear algebra"
 teaching: 20
-exercises: 20
+exercises: 30
 questions:
 - "How can you parallelize vector and matrix operations?"
 objectives:
@@ -206,40 +206,3 @@ This leads to a very important idea, the concept of re-entrant functions. You ne
 > What happens to the run time as you change the number of threads available?
 {: .challenge}
 
-## Changing the number of threads at runtime
-
-We have been setting the number of threads to be used with an environment variable. There is also a function available to do this from within your code.
-
-~~~
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <omp.h>
-
-int main(int argc, char **argv) {
-   struct timespec ts_start, ts_end;
-   int size = 1000000;
-   int multiplier = 2;
-   int a[size];
-   int c[size];
-   int i;
-   float time_total;
-   omp_set_num_threads(10);
-   clock_gettime(CLOCK_MONOTONIC, &ts_start);
-   #pragma omp parallel for
-   for (i = 0; i<size; i++) {
-      c[i] = multiplier * a[i];
-   }
-   clock_gettime(CLOCK_MONOTONIC, &ts_end);
-   time_total = (ts_end.tv_sec - ts_start.tv_sec)*1000000000 + (ts_end.tv_nsec - ts_start.tv_nsec);
-   printf("Total time is %f ms\n", time_total/1000000);
-}
-~~~
-{: .source}
-
-Here we added a call to 'omp_set_num_threads()' in order to explicitly set the number of threads requested to 10.
-
-> ## Compiler gotchas
-> This call is one of the optional ones. You particular compiler/version may or may not support it.
-> If it doesn't support the call, it will simply fail silently, allowing your program to finish.
-{: .callout}

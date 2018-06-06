@@ -1,7 +1,7 @@
 ---
 title: "Numeric Integration - Calculating Areas"
 teaching: 20
-exercises: 20
+exercises: 0
 questions:
 - "How can we calculate integrals?"
 objectives:
@@ -45,7 +45,7 @@ The answer in this case should be 2. It will be off by a small amount because of
 > What happens if you change the step size?
 {: .challenge}
 
-You can get better or worse accuracy based on step size. We still want to see what happens to the time this program takes, but we will do it a different way. Since we just want to see the total amount of time, we will use the program time.
+You can get better or worse accuracy based on step size. We still want to see what happens to the time this program takes, but we will do it a different way. Since we just want to see the total amount of time, we will use the program `time`.
 
 > ## Timing
 > You can use the time utility to get the amount of time it takes for a program to run.
@@ -55,33 +55,39 @@ You can get better or worse accuracy based on step size. We still want to see wh
 > {: .bash}
 {: .callout}
 
-> ## Parallelizing numerical integration
-> How would you parallelize this code to get it to run faster?
-> > ## Parallel integration
-> > ~~~
-> > #include <stdio.h>
-> > #include <stdlib.h>
-> > #include <math.h>
-> > #include <omp.h>
-> >
-> > int main(int argc, char **argv) {
-> >    int steps = 1000;
-> >    float delta = M_PI/steps;
-> >    float total = 0.0;
-> >    int i;
-> >    #pragma omp parallel for
-> >    for (i=0; i<steps; i++) {
-> >       #pragma omp critical
-> >       total = total + sin(delta*i) * delta;
-> >    }
-> >    printf("The integral of sine from 0 to Pi is %f\n", total);
-> > }
-> > ~~~
-> > {: .source}
-> {: .solution}
-{: .challenge}
+## Parallelizing numerical integration
+How would you parallelize this code to get it to run faster?
 
-This challenge highlights a problem called a race condition. Since we are updating a global variable, there is a race between the various threads as to who can read and then write the value of 'total'. Multiple threads could read the current value, before a working thread can write their addition. So these reading threads essentially miss out on some additions to the total. This is handled by adding a critical section. A critical section only allows one thread at a time to run some code block.
+Obviously, we could add `#pragma parallel for`. But do we make `total` private, or not?
+
+This situation is more generally called a race condition. Since we are
+updating a global variable, there is a race between the various threads as to
+who can read and then write the value of `total`. Multiple threads could read
+the current value, before a working thread can write the result of its addition. So these
+reading threads essentially miss out on some additions to the total. This is
+handled by adding a critical section. A critical section only allows one thread
+at a time to run some code block.
+
+~~~
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <omp.h>
+
+int main(int argc, char **argv) {
+   int steps = 1000;
+   float delta = M_PI/steps;
+   float total = 0.0;
+   int i;
+   #pragma omp parallel for
+   for (i=0; i<steps; i++) {
+      #pragma omp critical
+      total = total + sin(delta*i) * delta;
+   }
+   printf("The integral of sine from 0 to Pi is %f\n", total);
+}
+~~~
+{: .source}
 
 The `critical` pragma is a very general construct that lets you ensure a code
 line is executed exclusively.  However, making a sum is a very common operation

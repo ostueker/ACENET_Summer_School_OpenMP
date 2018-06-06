@@ -23,13 +23,13 @@ C/C++
 
 FORTRAN
 ~~~
-!OMP ...
+!$OMP ...
 ~~~
 {: .source}
 
 ## Hello World
 
-How do we add in parallelism to the basic hello world program? The very first pragma that we will look at is the parallel pragma.
+How do we add in parallelism to the basic hello world program? The very first pragma that we will look at is the `parallel` pragma.
 
 ~~~
 #include <stdio.h>
@@ -51,7 +51,14 @@ gcc -fopenmp -o hello hello.c
 ~~~
 {: .source}
 
-When you run this program, you should see the output "Hello World" multiple times. But how many? By default, OpenMP will look at the machine that it is running on and see how many computer cores there are. It will then launch a thread for each core. You can control the number of threads, however, with environment variables. If you wanted to only have 3 threads used, you could do the following:
+When you run this program, you should see the output "Hello World" multiple
+times. But how many? 
+
+The standard says this is implementation dependent. But the usual default is,
+OpenMP will look at the machine that it is running on and see how many cores
+there are. It will then launch a thread for each core. You can control the
+number of threads, however, with environment variables. If you want only 3
+threads, do the following:
 
 ~~~
 export OMP_NUM_THREADS=3
@@ -115,6 +122,12 @@ Here, you will get each thread tagging their output with their unique ID, a numb
 > What order do the threads write out their messages in?
 > Try running the program a few times.
 > What's going on?
+>
+> > You should find that the messages are emitted in random order.
+> > This is an important rule of not only OpenMP programming, but parallel
+> > programming in general: Order of execution of parallel elements is 
+> > not guaranteed.
+> {: .solution}
 {: .challenge}
 
 > ## Conditional compilation
