@@ -39,7 +39,7 @@ integer starttime, endtime, tickspersec
 double precision x, y
 
 call system_clock(starttime)
-!$omp parallel do private(?, ?, ?) 
+!$omp parallel do private(..?...) 
 do j = 1, m
     do k = 1, n
         x = xmin + j*(xmax-xmin)/m
@@ -91,11 +91,12 @@ Check the run time:
 
 Now comes the parallelization.
 
-> ## Challenge 1: 
+> ## Exercise 1: Parallelize the code
+>
 > There is a `parallel do` directive in the code, exactly analogous to
 > the `parallel for` in C. But the `private()` clause is not complete.
-> Decide what variables should be made private, and then compile and
-> test the code like so:
+> Decide what variable or variables should be made private, and then 
+> compile and test the code like so:
 >
 > ~~~
 > gfortran -fopenmp mandel.f90 -o mandel-omp
@@ -120,22 +121,22 @@ execution. Threads that complete their iterations are then eligible to get
 additional work. The allocation process continues until all the iterations
 have been distributed to threads. 
 
-There's a tradeoff between overhead (i.e., how much time is wasted setting up
-the schedule) and load balancing (i.e., how much time is wasted waiting for
-that one last thread to catch up). Static scheduling has low overhead but may
-be badly balanced; dynamic scheduling has higher overhead. Both can also take a
-*chunk size*; larger chunks mean less overhead and greater memory locality,
-smaller chunks may mean finer load balancing. You can omit the chunk size, it
-defaults to 1.
+There's a tradeoff between overhead (i.e., how much time is spent setting up
+the schedule) and load balancing (i.e., how much time is spent waiting for the
+most heavily-worked thread to catch up). Static scheduling has low overhead but
+may be badly balanced; dynamic scheduling has higher overhead. Both can also
+take a *chunk size*; larger chunks mean less overhead and greater memory
+locality, smaller chunks may mean finer load balancing. You can omit the chunk
+size, it defaults to 1.
 
 Bad load balancing might be what's causing this Mandelbrot code not to
 parallelize very well. Let's add a `schedule()` clause and see what happens.
 
 ~~~
-!$omp parallel do private(?,?,?) schedule(dynamic,?)
+!$omp parallel do private(...?...) schedule(dynamic,?)
 ~~~
 
-> ## Play with the schedule() clause
+> ## Exercise 2: Play with the schedule() clause
 > 
 > Try different `schedule()` clauses and tabulate the run times with different
 > thread numbers. What seems to work best for this problem?
@@ -146,4 +147,3 @@ parallelize very well. Let's add a `schedule()` clause and see what happens.
 > decreases the chunk size as it works through the iterations.
 > Try it out too, if you like. With `schedule(guided,<chunk>)`, the chunk parameter
 > is the smallest chunk size it will try.
-{: .challenge}
