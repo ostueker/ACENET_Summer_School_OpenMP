@@ -1,7 +1,7 @@
 ---
 title: "Calculating Fibonacci numbers"
-teaching: 20
-exercises: 20
+teaching: 10
+exercises: 5
 questions:
 - "How to recurse in parallel"
 objectives:

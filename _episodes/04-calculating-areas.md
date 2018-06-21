@@ -1,6 +1,6 @@
 ---
 title: "Numeric Integration - Calculating Areas"
-teaching: 20
+teaching: 15
 exercises: 0
 questions:
 - "How can we calculate integrals?"

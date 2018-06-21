@@ -1,7 +1,7 @@
 ---
 title: "Searching through data"
 teaching: 20
-exercises: 20
+exercises: 15
 questions:
 - "How to search in parallel"
 objectives:

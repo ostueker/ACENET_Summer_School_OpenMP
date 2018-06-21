@@ -1,7 +1,7 @@
 ---
 title: "Hello World"
-teaching: 20
-exercises: 20
+teaching: 15
+exercises: 10
 questions:
 - "How do you compile and run an OpenMP program?"
 - "What are OpenMP pragmas?"
