@@ -78,16 +78,18 @@ end function
 {: .source}
 
 First, compile and run the program without OpenMP like so:
+~~~
  gfortran mandel.f90 -o mandel-serial 
  ./mandel-serial
-Appreciate the ASCII art, and note how long it took to run.
+~~~
+{: source}
+Appreciate the retro ASCII art, and note how long it took to run.
 A millisecond is not enough to get good performance measurements on.
 
 Next, increase the dimensions `m,n` to `3000,2000` and recompile. You don't
 want to dump 6,000,000 numbers to your screen, so send the output to a file:
- ./mandel-serial >mandel-serial.out
-Check the run time:
- tail -1 mandel-serial.out
+`./mandel-serial >mandel-serial.out`.  
+Check the run time: `tail -1 mandel-serial.out`
 
 Now comes the parallelization.
 
