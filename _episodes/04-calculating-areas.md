@@ -19,13 +19,13 @@ In this section, we will use the problem of numeric integration, i.e. calculatin
 
 int main(int argc, char **argv) {
    int steps = 1000;
-   float delta = M_PI/steps;
-   float total = 0.0;
+   double delta = M_PI/steps;
+   double total = 0.0;
    int i;
    for (i=0; i<steps; i++) {
       total = total + sin(delta*i) * delta;
    }
-   printf("The integral of sine from 0 to Pi is %f\n", total);
+   printf("The integral of sine from 0 to Pi is %.12f\n", total);
 }
 ~~~
 {: .source} 
