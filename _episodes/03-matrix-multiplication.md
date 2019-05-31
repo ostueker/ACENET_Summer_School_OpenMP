@@ -3,21 +3,21 @@ title: "Linear algebra"
 teaching: 20
 exercises: 30
 questions:
-- "How can you parallelize vector and matrix operations?"
+- "How do I parallelize a loop?"
 objectives:
-- "Learn the PARALLEL FOR pragma"
-- "Use it to break work up across multiple threads"
+- "Use the PARALLEL FOR pragma (or PARALLEL DO)"
 - "Use the PRIVATE clause"
 keypoints:
-- "The PARALLEL FOR pragma automatically parallelizes code"
-- "Need to be aware of global variables"
+- "The PARALLEL FOR (or PARALLEL DO) pragma makes a loop execute in parallel"
+- "A single variable accessed by different threads can cause wrong results"
+- "The PRIVATE clause makes a copy of a variable for each thread"
 ---
 
-One of the classic problems in parallel programming is linear algebra, in all of its beauty and complexity. We will be using a couple of simple problems in order to see how we can spread work out around whatever compute resources you may have available, and how OpenMP can make this task easier.
+One of the classic problems in parallel programming is linear algebra, in all of its beauty and complexity. We will use a couple of simple problems to see how to execute loops in paralle using OpenMP.
 
 ## Multiply an array by a constant
 
-The simplest problem is applying some function to an array of numbers. An example would be multiplying each value by some constant number. In C, you would use a for loop to do this multiplication for each entry. A single threaded example would look like the following.
+The simplest problem is applying some function to an array of numbers. An example is multiplying each value by some constant number. In serial you would use a for loop (in C; a DO loop in Fortran) to do this multiplication for each element, like this:
 
 ~~~
 #include <stdio.h>
@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
    }
    clock_gettime(CLOCK_MONOTONIC, &ts_end);
    time_total = (ts_end.tv_sec - ts_start.tv_sec)*1000000000 + (ts_end.tv_nsec - ts_start.tv_nsec);
-   printf("Total time is %f ms\n", time_total/1000000);
+   printf("Time in loop is %f ms.  %d iterations.\n", time_total/1000000, size);
 }
 ~~~
 {: .source}

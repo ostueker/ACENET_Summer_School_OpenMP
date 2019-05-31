@@ -6,11 +6,12 @@ questions:
 - "How do you compile and run an OpenMP program?"
 - "What are OpenMP pragmas?"
 objectives:
-- "Learning about pragmas"
 - "Compiling and running an OpenMP program"
 keypoints:
 - "Pragmas are directives to the compiler to parallelize something"
-- "If the compiler doesn't recognize OpenMP pragmas, it will compile a single-threaded program"
+- "Thread number is typically controlled with an environment variable, OMP_NUM_THREADS"
+- "Order of execution of parallel elements is not guaranteed."
+- "If the compiler doesn't recognize OpenMP pragmas, it will compile a single-threaded program.  But you may need to escape OpenMP function calls."
 ---
 
 Since OpenMP is an extension to the compiler, you need to be able to tell the compiler when and where to add the code necessary to create and use threads for the parallel sections. This is handled through special statements called pragmas. To a compiler that doesn't understand OpenMP, pragmas look like comments. The basic forms are:
@@ -48,6 +49,13 @@ To compile it, you'll need to add an extra flag to tell the compiler to treat th
 
 ~~~
 gcc -fopenmp -o hello hello.c
+~~~
+{: .source}
+
+If you prefer Intel compilers to GCC, use:
+
+~~~
+icc -qopenmp -o hello hello.c
 ~~~
 {: .source}
 
@@ -148,6 +156,8 @@ Here, you will get each thread tagging their output with their unique ID, a numb
 > >    {
 > > #ifdef _OPENMP
 > >    id = omp_get_thread_num();
+> > #else
+> >    id = 0;
 > > #endif
 > >    printf("Hello World from thread %d\n", id);
 > >    }
