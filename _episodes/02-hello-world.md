@@ -131,6 +131,7 @@ Here, you will get each thread tagging their output with their unique ID, a numb
 > Try running the program a few times.
 > What's going on?
 >
+> > ## Solution
 > > You should find that the messages are emitted in random order.
 > > This is an important rule of not only OpenMP programming, but parallel
 > > programming in general: Order of execution of parallel elements is 
@@ -166,3 +167,17 @@ Here, you will get each thread tagging their output with their unique ID, a numb
 > > {: .source}
 > {: .solution}
 {: .challenge}
+
+## Execution model
+
+It's a good idea to have a mental model of what happens when OpenMP does
+something in parallel.  When the program begins there is only one
+thread active, called the *master thread*.  When the code reaches a 
+point where parallel operations are required, the master thread creates
+(or activates) additional threads.  We call this "forking".  The master
+and the created threads work concurrently for a while.  Then at the end
+of the parallel code the created threads die or are suspended, and 
+the flow of control returns to the master thread.  We call this "joining".
+
+![OpenMP-execution-model](../fig/OpenMP-execution-model.svg)
+
