@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.2" width="96.01mm" height="42.41mm" viewBox="6200 11600 9601 4241" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xml:space="preserve">
+<svg version="1.2" width="215.9mm" height="279.4mm" viewBox="0 0 21590 27940" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xml:space="preserve">
  <defs class="ClipPathGroup">
   <clipPath id="presentation_clip_path" clipPathUnits="userSpaceOnUse">
-   <rect x="6200" y="11600" width="9601" height="4241"/>
+   <rect x="0" y="0" width="21590" height="27940"/>
   </clipPath>
   <clipPath id="presentation_clip_path_shrink" clipPathUnits="userSpaceOnUse">
-   <rect x="6209" y="11604" width="9582" height="4233"/>
+   <rect x="21" y="27" width="21547" height="27885"/>
   </clipPath>
  </defs>
  <defs>
@@ -44,11 +44,12 @@
    <glyph unicode="d" horiz-adv-x="1006" d="M 783,941 C 786,973 808,1110 851,1352 L 697,1376 705,1421 1029,1421 789,70 902,45 894,0 609,0 638,156 C 525,38 422,-21 329,-21 247,-21 182,10 134,72 86,133 62,215 62,317 62,431 87,538 136,639 185,739 252,818 337,877 422,935 516,964 618,964 681,964 736,956 783,941 Z M 760,837 C 737,852 713,864 688,873 663,882 633,886 598,886 535,886 477,861 422,812 367,763 323,695 290,608 257,521 240,432 240,339 240,268 255,211 284,168 313,125 353,104 403,104 440,104 481,116 525,141 568,165 610,199 651,243 L 760,837 Z"/>
    <glyph unicode="a" horiz-adv-x="901" d="M 789,70 L 902,45 894,0 609,0 638,156 C 525,38 422,-21 329,-21 248,-21 184,9 135,68 86,127 61,209 61,313 61,430 87,539 138,641 189,742 257,822 342,879 427,936 520,964 620,964 701,964 777,950 848,922 L 893,956 947,956 789,70 Z M 760,837 C 734,855 710,868 687,875 664,882 636,885 603,885 536,885 475,860 420,810 364,759 320,691 288,606 256,521 240,432 240,339 240,268 255,211 284,168 313,125 353,104 404,104 479,104 562,150 651,243 L 760,837 Z"/>
    <glyph unicode="O" horiz-adv-x="1350" d="M 1231,832 C 1231,965 1197,1073 1129,1154 1060,1235 970,1276 858,1276 759,1276 668,1242 585,1175 502,1107 434,1010 382,884 329,758 303,631 303,503 303,371 337,265 404,185 471,105 559,65 670,65 769,65 861,99 946,166 1030,233 1099,329 1152,455 1205,581 1231,707 1231,832 Z M 663,-20 C 556,-20 459,3 374,48 288,93 221,156 174,238 127,320 103,412 103,514 103,675 136,820 203,951 270,1081 361,1181 476,1251 591,1321 723,1356 871,1356 978,1356 1075,1334 1161,1289 1246,1244 1313,1180 1360,1099 1407,1017 1431,925 1431,822 1431,664 1398,519 1331,386 1264,253 1173,153 1058,84 943,15 811,-20 663,-20 Z"/>
+   <glyph unicode="M" horiz-adv-x="1826" d="M 721,0 L 686,0 455,1153 266,80 442,53 432,0 -24,0 -14,53 161,80 370,1262 202,1288 212,1341 594,1341 800,318 1398,1341 1800,1341 1790,1288 1614,1262 1405,80 1573,53 1563,0 1019,0 1029,53 1213,80 1402,1153 721,0 Z"/>
    <glyph unicode=" " horiz-adv-x="503"/>
   </font>
  </defs>
  <defs class="TextShapeIndex">
-  <g ooo:slide="id1" ooo:id-list="id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 id13 id14 id15 id16 id17 id18 id19 id20 id21 id22 id23"/>
+  <g ooo:slide="id1" ooo:id-list="id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 id13 id14 id15 id16 id17 id18 id19 id20 id21 id22 id23 id24"/>
  </defs>
  <defs class="EmbeddedBulletChars">
   <g id="bullet-char-template-57356" transform="scale(0.00048828125,-0.00048828125)">
@@ -83,6 +84,12 @@
   </g>
  </defs>
  <defs class="TextEmbeddedBitmaps"/>
+ <g>
+  <g id="id2" class="Master_Slide">
+   <g id="bg-id2" class="Background"/>
+   <g id="bo-id2" class="BackgroundObjects"/>
+  </g>
+ </g>
  <g class="SlideGroup">
   <g>
    <g id="container-id1">
@@ -223,28 +230,34 @@
         <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-style="italic" font-weight="400"><tspan class="TextPosition" x="8850" y="15110"><tspan fill="rgb(0,0,0)" stroke="none">time</tspan></tspan></tspan></text>
        </g>
       </g>
-      <g class="com.sun.star.drawing.OpenFreeHandShape">
+      <g class="com.sun.star.drawing.TextShape">
        <g id="id20">
+        <rect class="BoundingBox" stroke="none" fill="none" x="6000" y="15709" width="3101" height="1192"/>
+        <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Serif, serif" font-size="423px" font-style="italic" font-weight="400"><tspan class="TextPosition" x="6250" y="16211"><tspan fill="rgb(0,0,0)" stroke="none">Master thread</tspan></tspan></tspan></text>
+       </g>
+      </g>
+      <g class="com.sun.star.drawing.OpenFreeHandShape">
+       <g id="id21">
         <rect class="BoundingBox" stroke="none" fill="none" x="6419" y="14711" width="391" height="1131"/>
         <path fill="none" stroke="rgb(0,0,0)" d="M 6808,15840 C 6731,15635 6416,15732 6420,15434 6423,15208 6509,15078 6603,14932"/>
         <path fill="rgb(0,0,0)" stroke="none" d="M 6773,14711 L 6511,14889 6670,15010 6773,14711 Z"/>
        </g>
       </g>
       <g class="com.sun.star.drawing.TextShape">
-       <g id="id21">
+       <g id="id22">
         <rect class="BoundingBox" stroke="none" fill="none" x="12500" y="11600" width="3101" height="892"/>
         <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Serif, serif" font-size="423px" font-style="italic" font-weight="400"><tspan class="TextPosition" x="12750" y="12102"><tspan fill="rgb(0,0,0)" stroke="none">Other threads</tspan></tspan></tspan></text>
        </g>
       </g>
       <g class="com.sun.star.drawing.OpenFreeHandShape">
-       <g id="id22">
+       <g id="id23">
         <rect class="BoundingBox" stroke="none" fill="none" x="11883" y="11993" width="731" height="1272"/>
         <path fill="none" stroke="rgb(0,0,0)" d="M 12612,11994 C 12426,12034 12228,12062 12082,12206 11923,12362 11985,12569 11994,12753 L 11994,12929 11977,12986"/>
         <path fill="rgb(0,0,0)" stroke="none" d="M 11906,13264 L 12078,12998 11884,12949 11906,13264 Z"/>
        </g>
       </g>
       <g class="com.sun.star.drawing.OpenFreeHandShape">
-       <g id="id23">
+       <g id="id24">
         <rect class="BoundingBox" stroke="none" fill="none" x="12232" y="12112" width="370" height="1589"/>
         <path fill="none" stroke="rgb(0,0,0)" d="M 12600,12113 C 12422,12235 12424,12459 12370,12642 12318,12816 12341,12994 12335,13171 12330,13346 12332,13332 12333,13413"/>
         <path fill="rgb(0,0,0)" stroke="none" d="M 12335,13700 L 12433,13399 12233,13401 12335,13700 Z"/>
