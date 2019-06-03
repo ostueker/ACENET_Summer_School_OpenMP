@@ -7,13 +7,14 @@ questions:
 objectives:
 - "Use the PARALLEL FOR pragma (or PARALLEL DO)"
 - "Use the PRIVATE clause"
+- "Be able to identify data dependencies"
 keypoints:
 - "The PARALLEL FOR (or PARALLEL DO) pragma makes a loop execute in parallel"
 - "A single variable accessed by different threads can cause wrong results"
 - "The PRIVATE clause makes a copy of a variable for each thread"
 ---
 
-One of the classic problems in parallel programming is linear algebra, in all of its beauty and complexity. We will use a couple of simple problems to see how to execute loops in paralle using OpenMP.
+One of the classic applications of programming is linear algebra, in all of its beauty and complexity. We will use a few simple problems to see how to execute loops in parallel using OpenMP.
 
 ## Multiply an array by a constant
 

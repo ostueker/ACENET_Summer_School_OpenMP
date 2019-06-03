@@ -7,7 +7,9 @@ questions:
 objectives:
 - "Use general parallel sections"
 - "Have a single thread execute code"
+- "Use a reduction operator"
 keypoints:
+- "Reduction operators handle the common case of summation, and analogous operations"
 - "OpenMP can manage general parallel sections"
 - "You can use 'pragma omp single' to have a single thread execute something"
 ---
@@ -42,12 +44,31 @@ Using this as a starting point, we could use this code to have each available th
 There are times when you may need to drop out of a parallel section in order to have a single one of the threads executing some code. There is a keyword available, 'single', that allows the first thread to see it to execute some single code chunk.
 
 > ## Which thread runs first?
-> How can you find out which thread gets to run first in a parallel section?
-> 
-> Hint: Try to find something appropriate here: 
+> Modify the following code to find out which thread gets to run first in the parallel section.
+> You should be able to do it by adding only one line.
+> Here's a (rather dense) reference guide in which you can look for ideas:
 > <a href="https://www.openmp.org/wp-content/uploads/OpenMP-4.5-1115-CPP-web.pdf">Directives and Constructs for C/C++</a>.
+> 
+> ~~~
+> {: .source}
+> ~~~
+> #include <stdio.h>
+> #include <stdlib.h>
+> #include <omp.h>
 >
-> > ## Pragma omp single
+> int main(int argc, char **argv) {
+>    int id, size;
+>    #pragma omp parallel private(id,size)
+>    {
+>       size = omp_get_num_threads();
+>       id = omp_get_thread_num();
+>       printf("This thread %d of %d is first\n", id, size);
+>    }
+> }
+> ~~~
+> {: .source}
+>
+> > ## Solution
 > > ~~~
 > > #include <stdio.h>
 > > #include <stdlib.h>
