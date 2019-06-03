@@ -16,7 +16,7 @@ running Windows, then you should use PuTTY or MobaXTerm.
 Once you are logged in, you can request an interactive session on a compute node with the command
 
 ~~~
-salloc --account=acenet-wa --reservation=acenet-wr --time=8:00:00 --cpus-per-task=4 
+salloc --account=acenet-wa --reservation=acenet-wr_cpu --time=8:00:00 --cpus-per-task=4 
 ~~~
 {: .bash}
 
