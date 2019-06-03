@@ -16,5 +16,5 @@ There are two broad categories of parallel programming techniques that exist: th
 {: .prereq}
 
 Two printed sources we used while developing this material were:
-* [https://www.amazon.ca/Parallel-Programming-OpenMP-Rohit-Chandra/dp/1558606718 "Parallel Programming in OpenMP" by Chandra, Dagum, Kohr, Maydan, McDonald & Menon (Academic Press, 2001)]
-* [https://www.amazon.ca/Parallel-Programming-C-Mpi-Openmp/dp/0071232656 "Parallel Programming in C with MPI and OpenMP" by Michael J. Quinn (McGraw-Hill, 2004)]
+* ["Parallel Programming in OpenMP" by Chandra, Dagum, Kohr, Maydan, McDonald & Menon (Academic Press, 2001)](https://www.amazon.ca/Parallel-Programming-C-Mpi-Openmp/dp/0071232656)
+* ["Parallel Programming in C with MPI and OpenMP" by Michael J. Quinn](https://www.amazon.ca/Parallel-Programming-OpenMP-Rohit-Chandra/dp/1558606718)
