@@ -212,9 +212,9 @@ course, but that's a separate question.)  '''Data dependency''' is an important
 concept we use to guarantee that we're transforming a serial program into an
 equivalent parallel program--- equivalent in terms of its output, that is.
 
-''If there is a data dependency between two statements, then the order in which
+_If there is a data dependency between two statements, then the order in which
 those statements are executed may affect the output of the program, and hence
-its correctness.''
+its correctness._
 
 Consider this loop that computes a cumulative sum:
 ~~~
@@ -224,23 +224,23 @@ for ( i=2; i<N; i=i+1 ) {
 ~~~
 {: .source}
 
-The iteration with `i == 2` for example reads locations `a[1]` and `a[2]` and
-writes location `a[2]`.  The iteration with `i == 3` then reads locations
+The iteration with `i==2` for example reads locations `a[1]` and `a[2]` and
+writes location `a[2]`.  The iteration with `i==3` then reads locations
 `a[2]` and `a[3]`.  Since `a[2]` was read by both and written by one, there is
 a data dependency on `a[2]` between the assignment statement in successive loop
 iterations.   So, the "statements" in the definition don't need to be separate
 lines of code.
 
-Consider also what it would mean to run this loop in parallel:  Different
-iterations carried out by different threads of execution, possibly at the same
+Now think about what it would mean to run this loop in parallel:  Different
+iterations would be carried out by different threads of execution, possibly at the same
 time.  If any two iterations didn't happen in the order dictated by the serial
 code, the results would be wrong.
 
-There are at least three different types of data dependencies:
-# Flow dependencies, like the last example, when one statement uses the results of another
-# Anti-dependencies, when one statement should write to a location only ''after'' another has read what's there
-# Output dependencies, when two statements write to a location, so the result will depend on which one wrote to it last
-There's a wikipedia page on data depencies:  https://en.wikipedia.org/wiki/Data_dependency
+There are three types of data dependencies:
+* Flow dependencies, like the last example, when one statement uses the results of another
+* Anti-dependencies, when one statement should write to a location only ''after'' another has read what's there
+* Output dependencies, when two statements write to a location, so the result will depend on which one wrote to it last
+There's a wikipedia page on data depencies: <https://en.wikipedia.org/wiki/Data_dependency>
 
 > ## Is There a Dependency?
 > 
@@ -276,7 +276,7 @@ There's a wikipedia page on data depencies:  https://en.wikipedia.org/wiki/Data_
 > > Loop #4 might or might not, depending on the contents of array `idx`. 
 > > If any two entries of `idx` are the same, then there's a dependency.
 > >
-> {: solution}
+> {: .solution}
 {: .challenge}
 
 ## Thread-safe functions 
@@ -289,4 +289,4 @@ example of this is when generating pseudo-random numbers. Most random number
 generators maintain state between calls to them. If they aren't written to be
 thread-safe, then that internal state can get mixed up by multiple threads
 calling them at the same time.  For more, see
-https://en.wikipedia.org/wiki/Thread_safety.
+<https://en.wikipedia.org/wiki/Thread_safety>.
