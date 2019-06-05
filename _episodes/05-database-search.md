@@ -50,8 +50,6 @@ There are times when you may need to drop out of a parallel section in order to 
 > <a href="https://www.openmp.org/wp-content/uploads/OpenMP-4.5-1115-CPP-web.pdf">Directives and Constructs for C/C++</a>.
 > 
 > ~~~
-> {: .source}
-> ~~~
 > #include <stdio.h>
 > #include <stdlib.h>
 > #include <omp.h>
