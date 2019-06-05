@@ -52,6 +52,8 @@ We added some calls to 'clock_gettime()' from the 'time.h' header file to get th
 {: .challenge}
 
 How complicated is it to turn this program into a parallel program?
+Not complicated at all:  We add two lines, `#include <omp.h>` near the top,
+and  `#pragma omp parallel for` just before the `for (...)` statement:
 
 ~~~
 #include <stdio.h>
@@ -79,11 +81,11 @@ int main(int argc, char **argv) {
 ~~~
 {: .source}
 
-> ## Compiling with GCC
-> Don't forget to add the option '-fopenmp' to your GCC compiler command.
+> ## Compiling and running
+> Don't forget to include the `-fopenmp` flag when compiling, 
+> and remember to set `OMP_NUM_THREADS` when running.
 {: .callout}
 
-Here, we added a line to include the header file 'omp.h' and a line to include the 'parallel for' pragma.
 
 > ## Using more threads
 > How many threads did you use?

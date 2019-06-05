@@ -43,7 +43,9 @@ The answer in this case should be 2. It will be off by a small amount because of
 
 > ## Step size
 > How would you change the step size.  What happens if you do?
-> > You can decrease the step size by increasing the `steps` variable.  (Well, constant, sort of.)
+>
+> > ## Solution
+> > You can decrease the step size by increasing the `steps` variable.
 > > We normally expect this to increase the accuracy of the result.  Does it? 
 > > Is there a noticeable effect on the run time?
 > {: .solution}

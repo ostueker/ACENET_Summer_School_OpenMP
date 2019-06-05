@@ -181,3 +181,7 @@ the flow of control returns to the master thread.  We call this "joining".
 
 ![OpenMP-execution-model](../fig/OpenMP-execution-model.svg)
 
+OpenMP also divides the memory into two types:  Global (or shared) memory, and
+thread-local memory.  Every thread can read and write the global memory, but
+each thread also gets a little slice of memory that can only be read or written
+by that thread.

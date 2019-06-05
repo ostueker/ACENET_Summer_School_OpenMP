@@ -57,7 +57,7 @@ Hello World
 
 ># GCC on Compute Canada
 >
-> The default environment on Graham includes a gcc compiler. Not all systems are set up this way, though. On Niagara, for instance, the default environment is very minimal and you must load a module explicitly to access any compiler: 
+> The default environment on the general purpose clusters (Beluga, Cedar, Graham) includes a gcc compiler. Not all systems are set up this way, though. On Niagara, for instance, the default environment is very minimal and you must load a module explicitly to access any compiler: 
 >
 > ~~~
 > $ module load gcc
